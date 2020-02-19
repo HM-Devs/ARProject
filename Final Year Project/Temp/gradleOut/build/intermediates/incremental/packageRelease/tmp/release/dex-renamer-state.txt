@@ -1,0 +1,4 @@
+#Wed Feb 19 17:16:55 GMT 2020
+base.0=C\:\\Users\\Hamza\\Desktop\\ARProject\\Final Year Project\\Temp\\gradleOut\\build\\intermediates\\transforms\\dexMerger\\release\\0
+path.0=classes.dex
+renamed.0=classes.dex

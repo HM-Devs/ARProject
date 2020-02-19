@@ -2,7 +2,7 @@ Android
 PlayerPath?
 C:/Users/Hamza/Desktop/ARProject/Final Year Project/test.apk
 SceneListBegin?
-Assets/Scenes/SampleScene.unity
+Assets/Main.unity
 SceneListEnd?
 984dcc0ba3707b7691fbdca8ff508d28 Unity.TextMeshPro.dll:TMPro.TMP_SelectionCaret
 01aa15e337e3a9c62f15153dfac6d589 Unity.TextMeshPro.dll:TMPro.TMP_Dropdown
@@ -174,3 +174,28 @@ c6666661329916e218bee7f5e79e60f5 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 3165968ba45c74472d279ba04455fccb Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
 20d20168517d1c0e098918311aa95bbb Unity.XR.ARFoundation.dll:UnityEngine.XR.ARFoundation.ARCameraBackground
 8649814970b42d345b89944b862453cc Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
+2ac60b8c74c9938127f2cb09cd3acd9f Assembly-CSharp.dll:.ARTapToPlaceObject
+586db862012075ae4c6008b3ac63c013 Assembly-CSharp.dll:PW.ServeOrder
+5d94b7a46dbab6dd0620d69a3a7ce2f2 Assembly-CSharp.dll:PW.BasicGameEvents
+9349a293523d2b487173387fc1d5dcb8 Assembly-CSharp.dll:PW.PlayerSlots
+d91eaaf60e414795fa53a84246fccecb Assembly-CSharp.dll:.ScreenShotHelper
+56a1f7cb1efc26eaed04badcc5c177c0 Assembly-CSharp.dll:PW.ProductGameObject
+b781422d477ffa400b0ad9a8c8ef3e82 Assembly-CSharp.dll:PW.DeleteProductOnSlot
+db4c154b1cde14b0c42051fa3e0e5f74 Assembly-CSharp.dll:PW.OnClickCoverHelper
+8ce1951a5e67c91fe168e075a2b8da47 Assembly-CSharp.dll:PW.HeatableProduct
+62596a2a2a9cdf0f3d9e0b8fa3b109cc Assembly-CSharp.dll:PW.PanGameObject
+82611117e47ae0243e4512cf986b17a6 Assembly-CSharp.dll:PW.StoveGameObject
+d42fa13faa0039f96ad090cc79e18af9 Assembly-CSharp.dll:PW.FillCupHelper
+bcac67fc244f1f4fa80b41900b3550df Assembly-CSharp.dll:PW.BasicCameraControl
+b0742f5133f3bcabe21ee31097d5490b Assembly-CSharp.dll:PW.CookableProduct
+70cfd742f4c661cbe458cc49e4e4434e Assembly-CSharp.dll:PW.OrderGenerator
+77f368ee4924d1697f11459ad85c4d66 Assembly-CSharp.dll:PW.ProductWithCover
+56a1f7cb1efc26eaed04badcc5c177c0 Assembly-CSharp.dll:PW.DrinkableProduct
+62596a2a2a9cdf0f3d9e0b8fa3b109cc Assembly-CSharp.dll:PW.CookingGameObject
+f57c9bd74dc34dad03e4c3e4ca1f49d5 Assembly-CSharp.dll:PW.BewerageMaker
+934089074c05d03a922a054827375bc1 Assembly-CSharp.dll:PW.CreateProductOnPlaceHolder
+b5ad3eafc85b336aa910dba2e7687591 Assembly-CSharp.dll:PW.ProgressHelper
+17495434a160a8a0f7bd32a81a16db8d Assembly-CSharp.dll:PW.ProductManager
+f6e282b02d9a0905e7bbec50b200b25c Assembly-CSharp.dll:PW.ReadyToServe
+c952fd4b617a2734d0f6166a44697272 Assembly-CSharp.dll:PW.Microwave
+5d40812e8060c7de0b704d397efea056 Assembly-CSharp.dll:PW.SliceHelper
