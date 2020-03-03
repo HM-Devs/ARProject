@@ -53,12 +53,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\CoffeeShopStarterPack\Scripts\Editor\BewerageMakerEditor.cs" />
-     <Compile Include="Assets\CoffeeShopStarterPack\Scripts\Editor\ProductEditor.cs" />
-     <Compile Include="Assets\CoffeeShopStarterPack\Scripts\Editor\ProductManagerEditor.cs" />
-     <Compile Include="Assets\CoffeeShopStarterPack\Scripts\Editor\ScreenShotHelperEditor.cs" />
-     <Compile Include="Assets\CoffeeShopStarterPack\Scripts\Editor\ScreenShotImportSettings.cs" />
-     <Compile Include="Assets\CoffeeShopStarterPack\Scripts\Editor\SliceHelperEditor.cs" />
+     <Compile Include="Assets\Prefabs\CoffeeShopStarterPack\Scripts\Editor\BewerageMakerEditor.cs" />
+     <Compile Include="Assets\Prefabs\CoffeeShopStarterPack\Scripts\Editor\ProductEditor.cs" />
+     <Compile Include="Assets\Prefabs\CoffeeShopStarterPack\Scripts\Editor\ProductManagerEditor.cs" />
+     <Compile Include="Assets\Prefabs\CoffeeShopStarterPack\Scripts\Editor\ScreenShotHelperEditor.cs" />
+     <Compile Include="Assets\Prefabs\CoffeeShopStarterPack\Scripts\Editor\ScreenShotImportSettings.cs" />
+     <Compile Include="Assets\Prefabs\CoffeeShopStarterPack\Scripts\Editor\SliceHelperEditor.cs" />
  <Reference Include="Unity.XR.ARKit">
  <HintPath>C:/Users/Hamza/Desktop/ARProject/Final Year Project/Library/ScriptAssemblies/Unity.XR.ARKit.dll</HintPath>
  </Reference>

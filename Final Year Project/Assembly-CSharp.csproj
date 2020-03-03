@@ -53,33 +53,34 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\AssetsLocation\ARTapToPlaceObject.cs" />
-     <Compile Include="Assets\CoffeeShopStarterPack\Scripts\BewerageMaker.cs" />
-     <Compile Include="Assets\CoffeeShopStarterPack\Scripts\CookableProduct.cs" />
-     <Compile Include="Assets\CoffeeShopStarterPack\Scripts\CookingGameObject.cs" />
-     <Compile Include="Assets\CoffeeShopStarterPack\Scripts\CreateProductOnPlaceHolder.cs" />
-     <Compile Include="Assets\CoffeeShopStarterPack\Scripts\DeleteProductOnSlot.cs" />
-     <Compile Include="Assets\CoffeeShopStarterPack\Scripts\DrinkableProduct.cs" />
-     <Compile Include="Assets\CoffeeShopStarterPack\Scripts\FillCupHelper.cs" />
-     <Compile Include="Assets\CoffeeShopStarterPack\Scripts\HeatableProduct.cs" />
-     <Compile Include="Assets\CoffeeShopStarterPack\Scripts\Microwave.cs" />
-     <Compile Include="Assets\CoffeeShopStarterPack\Scripts\OnClickCoverHelper.cs" />
-     <Compile Include="Assets\CoffeeShopStarterPack\Scripts\OrderGenerator.cs" />
-     <Compile Include="Assets\CoffeeShopStarterPack\Scripts\PanGameObject.cs" />
-     <Compile Include="Assets\CoffeeShopStarterPack\Scripts\PlayerSlots.cs" />
-     <Compile Include="Assets\CoffeeShopStarterPack\Scripts\Product.cs" />
-     <Compile Include="Assets\CoffeeShopStarterPack\Scripts\ProductGameObject.cs" />
-     <Compile Include="Assets\CoffeeShopStarterPack\Scripts\ProductManager.cs" />
-     <Compile Include="Assets\CoffeeShopStarterPack\Scripts\ProductType.cs" />
-     <Compile Include="Assets\CoffeeShopStarterPack\Scripts\ProductWithCover.cs" />
-     <Compile Include="Assets\CoffeeShopStarterPack\Scripts\ProgressHelper.cs" />
-     <Compile Include="Assets\CoffeeShopStarterPack\Scripts\ReadyToServe.cs" />
-     <Compile Include="Assets\CoffeeShopStarterPack\Scripts\ServeOrder.cs" />
-     <Compile Include="Assets\CoffeeShopStarterPack\Scripts\StoveGameObject.cs" />
-     <Compile Include="Assets\CoffeeShopStarterPack\Scripts\Utilities\BasicCameraControl.cs" />
-     <Compile Include="Assets\CoffeeShopStarterPack\Scripts\Utilities\BasicGameEvents.cs" />
-     <Compile Include="Assets\CoffeeShopStarterPack\Scripts\Utilities\ScreenShotHelper.cs" />
-     <Compile Include="Assets\CoffeeShopStarterPack\Scripts\Utilities\SliceHelper.cs" />
+     <Compile Include="Assets\Prefabs\CoffeeShopStarterPack\Scripts\BewerageMaker.cs" />
+     <Compile Include="Assets\Prefabs\CoffeeShopStarterPack\Scripts\CookableProduct.cs" />
+     <Compile Include="Assets\Prefabs\CoffeeShopStarterPack\Scripts\CookingGameObject.cs" />
+     <Compile Include="Assets\Prefabs\CoffeeShopStarterPack\Scripts\CreateProductOnPlaceHolder.cs" />
+     <Compile Include="Assets\Prefabs\CoffeeShopStarterPack\Scripts\DeleteProductOnSlot.cs" />
+     <Compile Include="Assets\Prefabs\CoffeeShopStarterPack\Scripts\DrinkableProduct.cs" />
+     <Compile Include="Assets\Prefabs\CoffeeShopStarterPack\Scripts\FillCupHelper.cs" />
+     <Compile Include="Assets\Prefabs\CoffeeShopStarterPack\Scripts\HeatableProduct.cs" />
+     <Compile Include="Assets\Prefabs\CoffeeShopStarterPack\Scripts\Microwave.cs" />
+     <Compile Include="Assets\Prefabs\CoffeeShopStarterPack\Scripts\OnClickCoverHelper.cs" />
+     <Compile Include="Assets\Prefabs\CoffeeShopStarterPack\Scripts\OrderGenerator.cs" />
+     <Compile Include="Assets\Prefabs\CoffeeShopStarterPack\Scripts\PanGameObject.cs" />
+     <Compile Include="Assets\Prefabs\CoffeeShopStarterPack\Scripts\PlayerSlots.cs" />
+     <Compile Include="Assets\Prefabs\CoffeeShopStarterPack\Scripts\Product.cs" />
+     <Compile Include="Assets\Prefabs\CoffeeShopStarterPack\Scripts\ProductGameObject.cs" />
+     <Compile Include="Assets\Prefabs\CoffeeShopStarterPack\Scripts\ProductManager.cs" />
+     <Compile Include="Assets\Prefabs\CoffeeShopStarterPack\Scripts\ProductType.cs" />
+     <Compile Include="Assets\Prefabs\CoffeeShopStarterPack\Scripts\ProductWithCover.cs" />
+     <Compile Include="Assets\Prefabs\CoffeeShopStarterPack\Scripts\ProgressHelper.cs" />
+     <Compile Include="Assets\Prefabs\CoffeeShopStarterPack\Scripts\ReadyToServe.cs" />
+     <Compile Include="Assets\Prefabs\CoffeeShopStarterPack\Scripts\ServeOrder.cs" />
+     <Compile Include="Assets\Prefabs\CoffeeShopStarterPack\Scripts\StoveGameObject.cs" />
+     <Compile Include="Assets\Prefabs\CoffeeShopStarterPack\Scripts\Utilities\BasicCameraControl.cs" />
+     <Compile Include="Assets\Prefabs\CoffeeShopStarterPack\Scripts\Utilities\BasicGameEvents.cs" />
+     <Compile Include="Assets\Prefabs\CoffeeShopStarterPack\Scripts\Utilities\ScreenShotHelper.cs" />
+     <Compile Include="Assets\Prefabs\CoffeeShopStarterPack\Scripts\Utilities\SliceHelper.cs" />
+     <Compile Include="Assets\Scripts\ARTapToPlaceObject.cs" />
+     <Compile Include="Assets\Scripts\SceneSwitcher.cs" />
  <Reference Include="Unity.XR.ARKit">
  <HintPath>C:/Users/Hamza/Desktop/ARProject/Final Year Project/Library/ScriptAssemblies/Unity.XR.ARKit.dll</HintPath>
  </Reference>
