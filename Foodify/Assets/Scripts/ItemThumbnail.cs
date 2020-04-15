@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum typeOfFurniture
+public enum typeOfMenuItem
 {
-    lights,tables_chairs,self,beds,decoration,toilet
+    starters,mains,desserts,drinks,sides
 }
 
 public class ItemThumbnail : MonoBehaviour
 {
     public MainMenu inv;
-    public typeOfFurniture type;
+    public typeOfMenuItem type;
     public int indx = 0;
     // Start is called before the first frame update
     void Start()
@@ -28,37 +28,32 @@ public class ItemThumbnail : MonoBehaviour
     //call to the inventory to set the gameobject
     public void selectGameObject_fromInventory()
     {
-        if(type==typeOfFurniture.lights)
+        if(type==typeOfMenuItem.starters)
         {
-            inv.selectedFurniture = typeOfFurniture.lights;
+            inv.selectedMenuItem = typeOfMenuItem.starters;
             
         }
-        else if (type == typeOfFurniture.tables_chairs)
+        else if (type == typeOfMenuItem.mains)
         {
-            inv.selectedFurniture = typeOfFurniture.tables_chairs;
+            inv.selectedMenuItem = typeOfMenuItem.mains;
             
         }
-        else if (type == typeOfFurniture.self)
+        else if (type == typeOfMenuItem.desserts)
         {
-            inv.selectedFurniture = typeOfFurniture.self;
+            inv.selectedMenuItem = typeOfMenuItem.desserts;
 
         }
-        else if (type == typeOfFurniture.beds)
+        else if (type == typeOfMenuItem.drinks)
         {
-            inv.selectedFurniture = typeOfFurniture.beds;
+            inv.selectedMenuItem = typeOfMenuItem.drinks;
 
         }
-        else if (type == typeOfFurniture.decoration)
+        else if (type == typeOfMenuItem.sides)
         {
-            inv.selectedFurniture = typeOfFurniture.decoration;
+            inv.selectedMenuItem = typeOfMenuItem.sides;
 
         }
-        else if (type == typeOfFurniture.toilet)
-        {
-            inv.selectedFurniture = typeOfFurniture.toilet;
-
-        }
-        inv.selectedIndex = indx;
+        inv.selectedItemIndex = indx;
     }
 
 }

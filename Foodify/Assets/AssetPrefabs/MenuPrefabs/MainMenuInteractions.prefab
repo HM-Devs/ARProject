@@ -935,7 +935,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2357326504673465395}
-        m_MethodName: generateDecorationMenu
+        m_MethodName: createSidesMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1221,7 +1221,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2357326504673465395}
-        m_MethodName: generateChairTableMenu
+        m_MethodName: createMainsMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1423,7 +1423,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2357326504673465395}
-        m_MethodName: generateLightMenu
+        m_MethodName: createStartersMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1795,7 +1795,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2357326504673465395}
-        m_MethodName: generateSelfMenu
+        m_MethodName: createDessertsMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1923,7 +1923,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2357326504673465395}
-        m_MethodName: generateBedsMenu
+        m_MethodName: createDrinksMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2111,7 +2111,6 @@ GameObject:
   - component: {fileID: 2357326504673465393}
   - component: {fileID: 2357326504673465392}
   - component: {fileID: 2357326504673465395}
-  - component: {fileID: 2357326503579170300}
   m_Layer: 5
   m_Name: MainMenuInteractions
   m_TagString: inventory
@@ -2213,103 +2212,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0df7e09336174314d8a393774db06de3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedFurniture: 0
-  inventoryObject: {fileID: 0}
-  selectedIndex: 0
-  lights:
-  - {fileID: 100002, guid: f4383bc7fc56a1e44b009cab877fd6c7, type: 3}
-  - {fileID: 100000, guid: 5ab7df4388e0265499e7e58faf1d6aed, type: 3}
-  - {fileID: 100002, guid: bac686a178055394f9dfa2e461faba8b, type: 3}
-  - {fileID: 100004, guid: ab7e43b46e30f5a409fe73d7d545bfa4, type: 3}
-  chair_tables:
-  - {fileID: 100002, guid: da90dd5c59fc7b74797111fdae04254f, type: 3}
-  - {fileID: 100004, guid: 89131f46d6bfc864699138153a2cc996, type: 3}
-  - {fileID: 100010, guid: dce57d1e50d1fef489ee2d0fe5716701, type: 3}
-  - {fileID: 100006, guid: ef18cf68e5c7efc49b863727df55dff7, type: 3}
-  - {fileID: 100000, guid: d2a377b97363a554a96a26b876de1213, type: 3}
-  - {fileID: 100004, guid: 2de9ad0fa697ed54db49ee8dcbe9d875, type: 3}
-  - {fileID: 100002, guid: d534d0198c237a043a8e671f0bf2859e, type: 3}
-  - {fileID: 100020, guid: 3afc3ad1f4025944cb7622a67af41586, type: 3}
-  - {fileID: 100002, guid: b75a9f5bde480c848a601653b942291a, type: 3}
-  self:
-  - {fileID: 100000, guid: 2efb098e46ba3e44cae4f1ba84005732, type: 3}
-  - {fileID: 100008, guid: 6cb4f5f750494f740a101f4c67f3f2c0, type: 3}
-  - {fileID: 100000, guid: 51df288df6d8c864aae27c801a5fd8a5, type: 3}
-  - {fileID: 100000, guid: 33dd0111778766843be1b10fb0c038ab, type: 3}
-  - {fileID: 100000, guid: 8fc847fdd92983f43b5183ed20e269a3, type: 3}
-  beds:
-  - {fileID: 100008, guid: a11d318bf37c01d489a19dc2dc33ed7d, type: 3}
-  - {fileID: 100014, guid: b4bf5e3a00974a94ea1549814fc16ebf, type: 3}
-  - {fileID: 100002, guid: b3cad47395084a24ab9316d8de9eba94, type: 3}
-  decoration:
-  - {fileID: 100000, guid: 8920164852daafb4ea1cbf5c4f29f9c6, type: 3}
-  - {fileID: 100002, guid: 396d41ee955979149b21a20470890097, type: 3}
-  - {fileID: 100000, guid: caa8fd4c881e43744b8164d904df19c6, type: 3}
-  - {fileID: 100002, guid: b7768e1703027114b8fb81cb29192dc8, type: 3}
-  - {fileID: 100000, guid: 77cc829851270f641a67e7e2132e861a, type: 3}
-  toilet:
-  - {fileID: 100010, guid: f47c3332cc1e27e429e62f14a27f814d, type: 3}
-  - {fileID: 100004, guid: 2c528509df862ef449544165d18b2dbf, type: 3}
-  - {fileID: 100022, guid: 47af50246352ed14da4ade618d736175, type: 3}
-  lights_icons:
-  - {fileID: 21300000, guid: 3924e64b05cfe264ca7a879386514c0c, type: 3}
-  - {fileID: 21300000, guid: 1d941459ead6327478d0db0cb0dd1b2a, type: 3}
-  - {fileID: 21300000, guid: d4256d920f5896341b250e2d8344ef44, type: 3}
-  - {fileID: 21300000, guid: 9ba6a61bb6fe34e4a951c16584aba79e, type: 3}
-  chair_tables_icons:
-  - {fileID: 21300000, guid: 9973a9cfb471c2e4a82a16066b98996e, type: 3}
-  - {fileID: 21300000, guid: 0b3abefe7fc3c604f83869c2d18b21cc, type: 3}
-  - {fileID: 21300000, guid: 8e88f65380102f145ad500d62a75c308, type: 3}
-  - {fileID: 21300000, guid: 623e88078f9d06b4dbe7504220fb2f4e, type: 3}
-  - {fileID: 21300000, guid: 386e2ec436ff4ed4cbf05ef055c00aab, type: 3}
-  - {fileID: 21300000, guid: fa5a91b9b65791542876e18f371d5918, type: 3}
+  selectedMenuItem: 0
+  menuObject: {fileID: 0}
+  selectedItemIndex: 0
+  starters:
+  - {fileID: 100000, guid: b0c53192cd8c001478dacd98416c74e8, type: 3}
+  - {fileID: 100000, guid: b0c53192cd8c001478dacd98416c74e8, type: 3}
+  - {fileID: 100000, guid: b0c53192cd8c001478dacd98416c74e8, type: 3}
+  mains:
+  - {fileID: 100008, guid: 5a0a6ae0b3b302743abb8c8c0bda6cae, type: 3}
+  - {fileID: 100008, guid: 5a0a6ae0b3b302743abb8c8c0bda6cae, type: 3}
+  desserts:
+  - {fileID: 100008, guid: 5a0a6ae0b3b302743abb8c8c0bda6cae, type: 3}
+  - {fileID: 100008, guid: 5a0a6ae0b3b302743abb8c8c0bda6cae, type: 3}
+  drinks:
+  - {fileID: 100008, guid: 5a0a6ae0b3b302743abb8c8c0bda6cae, type: 3}
+  - {fileID: 100008, guid: 5a0a6ae0b3b302743abb8c8c0bda6cae, type: 3}
+  sides:
+  - {fileID: 100008, guid: 5a0a6ae0b3b302743abb8c8c0bda6cae, type: 3}
+  - {fileID: 100008, guid: 5a0a6ae0b3b302743abb8c8c0bda6cae, type: 3}
+  - {fileID: 100008, guid: 5a0a6ae0b3b302743abb8c8c0bda6cae, type: 3}
+  starters_icons:
+  - {fileID: 21300000, guid: b739748ca33483c48a2c779b8e63cea4, type: 3}
+  - {fileID: 21300000, guid: b739748ca33483c48a2c779b8e63cea4, type: 3}
+  - {fileID: 21300000, guid: b739748ca33483c48a2c779b8e63cea4, type: 3}
+  mains_icons:
+  - {fileID: 21300000, guid: 6bda5ca4ac6c43f40a3e0f3ae74c5b02, type: 3}
+  - {fileID: 21300000, guid: 6bda5ca4ac6c43f40a3e0f3ae74c5b02, type: 3}
+  desserts_icons:
   - {fileID: 21300000, guid: 05ca4fe8b71a866498e2d4e55151f92f, type: 3}
-  - {fileID: 21300000, guid: 4c286a9b0026dea48be73a226a6d2dfe, type: 3}
-  - {fileID: 21300000, guid: 4c75aef39eeae5542bbc4e2d1ad008d8, type: 3}
-  self_icons:
-  - {fileID: 21300000, guid: 8ff997c7133305b47bc1dbf0bf7082d8, type: 3}
-  - {fileID: 21300000, guid: 55081a205d045c14997a116e6d1ad6ae, type: 3}
-  - {fileID: 21300000, guid: 0aacba20bba710f4ebb789f4a27610d2, type: 3}
-  - {fileID: 21300000, guid: c4a3ac5b848af54468a81e62222b698b, type: 3}
-  - {fileID: 21300000, guid: ad8b665f423eea34aa0c9635d95693b7, type: 3}
-  beds_icons:
-  - {fileID: 21300000, guid: ea56adba3aed11745a3ca0470a896794, type: 3}
-  - {fileID: 21300000, guid: c7255357b76d3624289783135daeab09, type: 3}
-  - {fileID: 21300000, guid: e1ce6195b4fe1cb4082450b2e14b531a, type: 3}
-  decoration_icons:
-  - {fileID: 21300000, guid: 64d07b771d0ed5140a055d956ec4c25a, type: 3}
-  - {fileID: 21300000, guid: a84aad526125b2546bccf0d2d3b1223c, type: 3}
-  - {fileID: 21300000, guid: 2b19a4c4183828d408d4ed6dd5fdfe56, type: 3}
-  - {fileID: 21300000, guid: 80a0ac8746b84214995568f54d4d9ffe, type: 3}
-  - {fileID: 21300000, guid: e17a6ce9c56f80f40ae90c7ffb62253d, type: 3}
-  toilet_icons:
-  - {fileID: 21300000, guid: 5112fc7a4c2a6c145875414443779d82, type: 3}
-  - {fileID: 21300000, guid: b9a42aea4145e9f42bb56077e6d58021, type: 3}
-  - {fileID: 21300000, guid: c3aedb27c475c7141be5387c9fdea4f9, type: 3}
-  scrollView: {fileID: 2357326503283847068}
-  iconImage: {fileID: 2565769425708764110, guid: 7704de8566557ac4faa84ecf2d1574a4,
+  - {fileID: 21300000, guid: 05ca4fe8b71a866498e2d4e55151f92f, type: 3}
+  drinks_icons:
+  - {fileID: 21300000, guid: a8b4b711f6e46594289b7ec140c1af3f, type: 3}
+  - {fileID: 21300000, guid: a8b4b711f6e46594289b7ec140c1af3f, type: 3}
+  sides_icons:
+  - {fileID: 21300000, guid: fa5a91b9b65791542876e18f371d5918, type: 3}
+  - {fileID: 21300000, guid: fa5a91b9b65791542876e18f371d5918, type: 3}
+  - {fileID: 21300000, guid: fa5a91b9b65791542876e18f371d5918, type: 3}
+  menuScrollView: {fileID: 2357326503283847068}
+  thumbnailImage: {fileID: 2565769425708764110, guid: 7704de8566557ac4faa84ecf2d1574a4,
     type: 3}
-  inventoryText: {fileID: 2357326503714576784}
-  selectedObject: {fileID: 0}
---- !u!95 &2357326503579170300
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2357326504673465405}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9df418a12519a4c4d874247fec2770ca, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  mainMenuText: {fileID: 2357326503714576784}
+  menuSettings: {fileID: 2357326503174063151}
+  selectedMenuObject: {fileID: 0}
 --- !u!1 &2357326505119409002
 GameObject:
   m_ObjectHideFlags: 0
@@ -2455,7 +2400,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -66.968, y: 221}
+  m_AnchoredPosition: {x: -66.968, y: 214.5}
   m_SizeDelta: {x: 89.324, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2357326505136644177

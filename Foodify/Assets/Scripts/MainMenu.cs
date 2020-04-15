@@ -3,444 +3,483 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+//Note:Everything set up here is essentially controlled within the MainMenuInteractions gameobject
+// in the MenuPrefab folder.
+
+//Creation of the MainMenu class.
 public class MainMenu : MonoBehaviour
 {
-    //this variable knows which type has the user selected
-    public typeOfFurniture selectedFurniture;
+    //Variable used to know what type of menu item has been selected from a list of selected menu items.
+    public typeOfMenuItem selectedMenuItem;
 
-    // this is used to know which gameobject was selected by the user
-    public GameObject inventoryObject;
-    public int selectedIndex;
+    //Gameobject to know what game object has been selected by user, from its item index.
+    public GameObject menuObject;
+    public int selectedItemIndex;
 
-    //these are the gameobjects refered to the lights
-    [Header("FURNITURE GAMEOBJECTS ")]
-    public GameObject[] lights;
-    public GameObject[] chair_tables;
-    public GameObject[] self;
-    public GameObject[] beds;
-    public GameObject[] decoration;
-    public GameObject[] toilet;
+    //Gameobject creation for each sub-menu category. 
+    [Header("Main Menu Categories ")]
 
-    [Header("FURNITURE ICONS ")]
-    public Sprite[] lights_icons;
-    public Sprite[] chair_tables_icons;
-    public Sprite[] self_icons;
-    public Sprite[] beds_icons;
-    public Sprite[] decoration_icons;
-    public Sprite[] toilet_icons;
+    public GameObject[] starters;
+    public GameObject[] mains;
+    public GameObject[] desserts;
+    public GameObject[] drinks;
+    public GameObject[] sides;
 
-    [Header("OTHER VARIABLES")]
-    //this is the scroll view content
-    public Transform scrollView;
-    //this is the prefab used to generate the icons
-    public GameObject iconImage;
-    // this is the text on top of the container with the title
-    public Text inventoryText;
-    // this is the rectangle tansform of the scrollview
-    RectTransform rectTransf;
-    //the animation of the panel
-    Animator anim;
 
-    //the selected gameobject
-    public GameObject selectedObject=null;
+    //Thumbnail sprites attached to each menu sub-category - used to show users images of the item they're about to order.
+    [Header("Menu Category Thumbnails ")]
 
+    public Sprite[] starters_icons;
+    public Sprite[] mains_icons;
+    public Sprite[] desserts_icons;
+    public Sprite[] drinks_icons;
+    public Sprite[] sides_icons;
+
+
+    //Other UI settings setup here which are configured within the MainMenuInteractions gameobject.
+    [Header("Menu UI Settings")]
+
+    //Setup of the scroll view for our menu.
+    public Transform menuScrollView;
+
+    //Created prefab used to generate thumbnail images of each menu item used.
+    public GameObject thumbnailImage;
+
+    //Text of each sub-menu category - e.g (Starter, Mains, Drinks...)
+    public Text mainMenuText;
+
+    //GameObject used to open and close our menu
+    public GameObject menuSettings;
+
+    //Rectangular transform of the instantiated scrollview.
+    RectTransform rectTransform;
+
+    //Selected gameobject from the menu(default set to null until an actual item is selected by the user)
+    public GameObject selectedMenuObject = null;
+
+    //Start method, happens as soon as the app loads.
     void Start()
     {
-        rectTransf = scrollView.GetComponent<RectTransform>();
-        anim = GetComponent<Animator>();
+        //We create our rect transform for our menu.
+        rectTransform = menuScrollView.GetComponent<RectTransform>();
+
+        //By default, the menu is set to closed (false) - as it would get in the way of users trying the app.
+        menuSettings.SetActive(false);
     }
 
-    // Update is called once per frame
+    //The update method called every frame.
     void FixedUpdate()
     {
         if (Input.GetMouseButtonDown(0))
         {
+            //Checks the selected menu item, based on its type (starters)
+            if (selectedMenuItem == typeOfMenuItem.starters)
+            {
+                menuObject = starters[selectedItemIndex];
+            }
+            //Checks the selected menu item, based on its type (mains)
+            else if (selectedMenuItem == typeOfMenuItem.mains)
+            {
+                menuObject = mains[selectedItemIndex];
+            }
+            //Checks the selected menu item, based on its type (desserts)
+            else if (selectedMenuItem == typeOfMenuItem.desserts)
+            {
+                menuObject = desserts[selectedItemIndex];
+            }
+            //Checks the selected menu item, based on its type (drinks)
+            else if (selectedMenuItem == typeOfMenuItem.drinks)
+            {
+                menuObject = drinks[selectedItemIndex];
+            }
+            //Checks the selected menu item, based on its type (sides)
+            else if (selectedMenuItem == typeOfMenuItem.sides)
+            {
+                menuObject = sides[selectedItemIndex];
+            }
 
-            /////////////////////
-            // TYPE TEST
-            /////////////////////
-            //check the selected object
-            if(selectedFurniture==typeOfFurniture.lights)
-            {
-                inventoryObject = lights[selectedIndex];
-            }
-            //check the selected object
-            else if (selectedFurniture == typeOfFurniture.tables_chairs)
-            {
-                inventoryObject = chair_tables[selectedIndex];
-            }
-            //check the selected object
-            else if (selectedFurniture == typeOfFurniture.self)
-            {
-                inventoryObject = self[selectedIndex];
-            }
-            //check the selected object
-            else if (selectedFurniture == typeOfFurniture.beds)
-            {
-                inventoryObject = beds[selectedIndex];
-            }
-            //check the selected object
-            else if (selectedFurniture == typeOfFurniture.decoration)
-            {
-                inventoryObject = decoration[selectedIndex];
-            }
-            //check the selected object
-            else if (selectedFurniture == typeOfFurniture.toilet)
-            {
-                inventoryObject = toilet[selectedIndex];
-            }
-   
+            //A raycast is setup to track where users have clicked.
+            RaycastHit hits;
 
+            //Tracks based on mouse/touch input.
+            Ray raycast = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            ////////////////////////////
-            // RAYCAST HIT TEST
-            ///////////////////////////
-            //we use a raycast to know where the user has clicked
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit))
+            //If a raycast is is used and a hit is made.
+            if (Physics.Raycast(raycast, out hits))
             {
-                if (hit.collider.gameObject.tag == "ground" )
+                //Nested loop to see if the gameobject collided with has the tag ground (which is the plane).
+                if (hits.collider.gameObject.tag == "ground")
                 {
-                    if (selectedObject == null)
+                    //If the item selected is currently null.
+                    if (selectedMenuObject == null)
                     {
-                        //this is the instance of the inventory object
-                        GameObject go = Instantiate(inventoryObject, hit.point, Quaternion.Euler(-90, 0, 0));
+                        //We instantiate the gameobject item.
+                        GameObject go = Instantiate(menuObject, hits.point, Quaternion.Euler(-90, 0, 0));
 
-                        //set scale
-                        go.transform.localScale = go.transform.localScale*0.8f;
-                        //get and set components
+                        //We also set the scale.
+                        go.transform.localScale = go.transform.localScale * 0.8f;
+
+                        //And get and set components.
                         go.AddComponent<ItemInteraction>();
-                        //go.AddComponent<BoxCollider>();
                         go.tag = "object";
-                    }else
+                    }
+                    else
                     {
-                        
-                        ItemInteraction objcIntS = selectedObject.GetComponent<ItemInteraction>();
+                        //Otherwise we set the movement type to none and set the game object to null since none of the
+                        //Pre-conditions in our initial if-statement have been made.
+                        ItemInteraction objcIntS = selectedMenuObject.GetComponent<ItemInteraction>();
                         objcIntS.movType = movementType.none;
 
-                        selectedObject = null;
+                        //Object selected is now null.
+                        selectedMenuObject = null;
                     }
                 }
-                else if(hit.collider.gameObject.tag == "object")
+                //If the game object collided with has the tag object
+                else if (hits.collider.gameObject.tag == "object")
                 {
-                    selectedObject = hit.collider.gameObject;
+                    //Then the collision with the raycast is made.
+                    selectedMenuObject = hits.collider.gameObject;
 
                 }
             }
 
         }
-
-
-
     }
 
-    //it is called when pressing the light button
-    public void generateLightMenu()
+    //The starters menu is created when selected from the main menu.
+    public void createStartersMenu()
     {
+        //Inventory is opened and the menu is preset to clear.
         openInventory();
         clearMenu();
-        inventoryText.text = "Lights";
 
-        //set the rectangle transform to the correct size for the content
-        rectTransf.sizeDelta = new Vector2(rectTransf.sizeDelta.x, (lights.Length/2 + 2f) * 150);
+        //The text of the sub-category is displayed at the top of the menu.
+        mainMenuText.text = "Starters";
 
+        //Set the rectangle transform to fit a correct size for the required content to load.
+        rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x,
+            (starters.Length / 2 + 2f) * 150);
 
-        for (int i = 0; i < lights.Length; i++)
+        //If statement for starters
+        for (int i = 0; i < starters.Length; i++)
         {
-            //get the gameocomponents inside the icon
-            GameObject goI = Instantiate(iconImage,scrollView);
-            RectTransform rectT =goI.GetComponent<RectTransform>();
-            Image imgR = goI.GetComponent<Image>();
-            ItemThumbnail iconS =goI.GetComponent<ItemThumbnail>();
-            
+            //Retrieve the game-components inside of the thumbnail image used, including:
+            //The actual gameobject thumbnail, the rect transform element, the image used and the script attached (ItemThumbnail.cs)
+            GameObject gameobjectThumbnail = Instantiate(thumbnailImage, menuScrollView);
 
+            RectTransform rectTransform = gameobjectThumbnail.GetComponent<RectTransform>();
+
+            Image imgThumbnail = gameobjectThumbnail.GetComponent<Image>();
+
+            ItemThumbnail thumbnailScript = gameobjectThumbnail.GetComponent<ItemThumbnail>();
+
+            //Sizing the thumbnail directly.
             int div = i / 2;
             int rest = i % 2;
 
-
-            if (rest==0)
+            //If its set to 0 (even)
+            if (rest == 0)
             {
-                goI.transform.localPosition =new Vector3((1-0.5f)*rectT.sizeDelta.x, -(div+1.1f)* rectT.sizeDelta.y,0);
+                //Transform the thumbnail image as shown
+                gameobjectThumbnail.transform.localPosition = new Vector3((1 - 0.5f) * rectTransform.sizeDelta.x, -(div + 1.1f) * rectTransform.sizeDelta.y, 0);
             }
             else
             {
-                goI.transform.localPosition = new Vector3((2-0.5f)*rectT.sizeDelta.x, -(div+1.1f) * rectT.sizeDelta.y, 0); ;
+                //Format the thumbnail image like this instead
+                gameobjectThumbnail.transform.localPosition = new Vector3((2 - 0.5f) * rectTransform.sizeDelta.x, -(div + 1.1f) * rectTransform.sizeDelta.y, 0); ;
             }
 
-            //set the sprite
-            imgR.sprite = lights_icons[i];
+            //Finds the relevant thumbnail sprite element from the starters icon list.
+            imgThumbnail.sprite = starters_icons[i];
 
-            //set the icon scripts
-            iconS.type = typeOfFurniture.lights;
-            iconS.indx = i;
+            //Sets our thumbnail script for every icon used.
+            thumbnailScript.type = typeOfMenuItem.starters;
+            thumbnailScript.indx = i;
 
-           
+
         }
     }
     //it is called when pressing the chair/tables button
-    public void generateChairTableMenu()
+    public void createMainsMenu()
     {
+        //Inventory is opened and the menu is preset to clear.
         openInventory();
         clearMenu();
-        inventoryText.text = "Chairs and Tables";
 
-        //set the rectangle transform to the correct size for the content
-        rectTransf.sizeDelta = new Vector2(rectTransf.sizeDelta.x, (chair_tables.Length / 2 + 2f) * 150);
+        //The text of the sub-category is displayed at the top of the menu.
+        mainMenuText.text = "Mains";
 
-        for (int i = 0; i < chair_tables.Length; i++)
+        //Set the rectangle transform to fit a correct size for the required content to load.
+        rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x,
+            (mains.Length / 2 + 2f) * 150);
+
+        //If statement for starters
+        for (int i = 0; i < mains.Length; i++)
         {
-            //get the gameocomponents inside the icon
-            GameObject goI = Instantiate(iconImage, scrollView);
-            RectTransform rectT = goI.GetComponent<RectTransform>();
-            Image imgR = goI.GetComponent<Image>();
-            ItemThumbnail iconS = goI.GetComponent<ItemThumbnail>();
+            //Retrieve the game-components inside of the thumbnail image used, including:
+            //The actual gameobject thumbnail, the rect transform element, the image used and the script attached (ItemThumbnail.cs)
+            GameObject gameobjectThumbnail = Instantiate(thumbnailImage, menuScrollView);
 
+            RectTransform rectTransform = gameobjectThumbnail.GetComponent<RectTransform>();
+
+            Image imgThumbnail = gameobjectThumbnail.GetComponent<Image>();
+
+            ItemThumbnail thumbnailScript = gameobjectThumbnail.GetComponent<ItemThumbnail>();
+
+            //Sizing the thumbnail directly.
             int div = i / 2;
             int rest = i % 2;
 
-
+            //If its set to 0 (even)
             if (rest == 0)
             {
-                goI.transform.localPosition = new Vector3((1 - 0.5f) * rectT.sizeDelta.x, -(div + 1.1f) * rectT.sizeDelta.y, 0);
+                //Transform the thumbnail image as shown
+                gameobjectThumbnail.transform.localPosition = new Vector3((1 - 0.5f) * rectTransform.sizeDelta.x, -(div + 1.1f) * rectTransform.sizeDelta.y, 0);
             }
             else
             {
-                goI.transform.localPosition = new Vector3((2 - 0.5f) * rectT.sizeDelta.x, -(div + 1.1f) * rectT.sizeDelta.y, 0); ;
+                //Format the thumbnail image like this instead
+                gameobjectThumbnail.transform.localPosition = new Vector3((2 - 0.5f) * rectTransform.sizeDelta.x, -(div + 1.1f) * rectTransform.sizeDelta.y, 0); ;
             }
 
-            //set the sprite
-            imgR.sprite = chair_tables_icons[i];
+            //Finds the relevant thumbnail sprite element from the starters icon list.
+            imgThumbnail.sprite = mains_icons[i];
 
-            //set the icon scripts
-            iconS.type = typeOfFurniture.tables_chairs;
-            iconS.indx = i;
+            //Sets our thumbnail script for every icon used.
+            thumbnailScript.type = typeOfMenuItem.mains;
+            thumbnailScript.indx = i;
 
-          
+
         }
     }
     //it is called when pressing the self button
-    public void generateSelfMenu()
+    public void createDessertsMenu()
     {
-        clearMenu();
+        //Inventory is opened and the menu is preset to clear.
         openInventory();
+        clearMenu();
 
-        inventoryText.text = "Shelves";
+        //The text of the sub-category is displayed at the top of the menu.
+        mainMenuText.text = "Desserts";
 
-        //set the rectangle transform to the correct size for the content
-        rectTransf.sizeDelta = new Vector2(rectTransf.sizeDelta.x, (self.Length / 2 + 2f) * 150);
+        //Set the rectangle transform to fit a correct size for the required content to load.
+        rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x,
+            (desserts.Length / 2 + 2f) * 150);
 
-        for (int i = 0; i < self.Length; i++)
+        //If statement for starters
+        for (int i = 0; i < desserts.Length; i++)
         {
-            //get the gameocomponents inside the icon
-            GameObject goI = Instantiate(iconImage, scrollView);
-            RectTransform rectT = goI.GetComponent<RectTransform>();
-            Image imgR = goI.GetComponent<Image>();
-            ItemThumbnail iconS = goI.GetComponent<ItemThumbnail>();
+            //Retrieve the game-components inside of the thumbnail image used, including:
+            //The actual gameobject thumbnail, the rect transform element, the image used and the script attached (ItemThumbnail.cs)
+            GameObject gameobjectThumbnail = Instantiate(thumbnailImage, menuScrollView);
 
-            //this is used to determine the position of the image for odds and pair values
+            RectTransform rectTransform = gameobjectThumbnail.GetComponent<RectTransform>();
+
+            Image imgThumbnail = gameobjectThumbnail.GetComponent<Image>();
+
+            ItemThumbnail thumbnailScript = gameobjectThumbnail.GetComponent<ItemThumbnail>();
+
+            //Sizing the thumbnail directly.
             int div = i / 2;
             int rest = i % 2;
 
-
+            //If its set to 0 (even)
             if (rest == 0)
             {
-                goI.transform.localPosition = new Vector3((1 - 0.5f) * rectT.sizeDelta.x, -(div + 1.1f) * rectT.sizeDelta.y, 0);
+                //Transform the thumbnail image as shown
+                gameobjectThumbnail.transform.localPosition = new Vector3((1 - 0.5f) * rectTransform.sizeDelta.x, -(div + 1.1f) * rectTransform.sizeDelta.y, 0);
             }
             else
             {
-                goI.transform.localPosition = new Vector3((2 - 0.5f) * rectT.sizeDelta.x, -(div + 1.1f) * rectT.sizeDelta.y, 0); ;
+                //Format the thumbnail image like this instead
+                gameobjectThumbnail.transform.localPosition = new Vector3((2 - 0.5f) * rectTransform.sizeDelta.x, -(div + 1.1f) * rectTransform.sizeDelta.y, 0); ;
             }
 
-            //set the sprite
-            imgR.sprite = self_icons[i];
+            //Finds the relevant thumbnail sprite element from the starters icon list.
+            imgThumbnail.sprite = desserts_icons[i];
 
-            //set the icon scripts
-            iconS.type = typeOfFurniture.self;
-            iconS.indx = i;
-            
-       }
-    }
-    public void generateBedsMenu()
-    {
-        clearMenu();
-        openInventory();
-        inventoryText.text = "Beds";
+            //Sets our thumbnail script for every icon used.
+            thumbnailScript.type = typeOfMenuItem.desserts;
+            thumbnailScript.indx = i;
 
-        //set the rectangle transform to the correct size for the content
-        rectTransf.sizeDelta = new Vector2(rectTransf.sizeDelta.x, (beds.Length / 2 + 2f) * 150);
-
-        for (int i = 0; i < beds.Length; i++)
-        {
-            //get the gameocomponents inside the icon
-            GameObject goI = Instantiate(iconImage, scrollView);
-            RectTransform rectT = goI.GetComponent<RectTransform>();
-            Image imgR = goI.GetComponent<Image>();
-            ItemThumbnail iconS = goI.GetComponent<ItemThumbnail>();
-
-            //this is used to determine the position of the image for odds and pair values
-            int div = i / 2;
-            int rest = i % 2;
-
-
-            if (rest == 0)
-            {
-                goI.transform.localPosition = new Vector3((1 - 0.5f) * rectT.sizeDelta.x, -(div + 1.1f) * rectT.sizeDelta.y, 0);
-            }
-            else
-            {
-                goI.transform.localPosition = new Vector3((2 - 0.5f) * rectT.sizeDelta.x, -(div + 1.1f) * rectT.sizeDelta.y, 0); ;
-            }
-
-            //set the sprite
-            imgR.sprite = beds_icons[i];
-
-            //set the icon scripts
-            iconS.type = typeOfFurniture.beds;
-            iconS.indx = i;
-            
-       }
-    }
-    public void generateDecorationMenu()
-    {
-        clearMenu();
-        openInventory();
-        inventoryText.text = "Decoration";
-
-        //set the rectangle transform to the correct size for the content
-        rectTransf.sizeDelta = new Vector2(rectTransf.sizeDelta.x, (decoration.Length / 2 + 2f) * 150);
-
-        for (int i = 0; i < decoration.Length; i++)
-        {
-            //get the gameocomponents inside the icon
-            GameObject goI = Instantiate(iconImage, scrollView);
-            RectTransform rectT = goI.GetComponent<RectTransform>();
-            Image imgR = goI.GetComponent<Image>();
-            ItemThumbnail iconS = goI.GetComponent<ItemThumbnail>();
-
-            //this is used to determine the position of the image for odds and pair values
-            int div = i / 2;
-            int rest = i % 2;
-
-
-            if (rest == 0)
-            {
-                goI.transform.localPosition = new Vector3((1 - 0.5f) * rectT.sizeDelta.x, -(div + 1.1f) * rectT.sizeDelta.y, 0);
-            }
-            else
-            {
-                goI.transform.localPosition = new Vector3((2 - 0.5f) * rectT.sizeDelta.x, -(div + 1.1f) * rectT.sizeDelta.y, 0); ;
-            }
-
-            //set the sprite
-            imgR.sprite = decoration_icons[i];
-
-            //set the icon scripts
-            iconS.type = typeOfFurniture.decoration;
-            iconS.indx = i;
 
         }
     }
-    public void generateToiletMenu()
+    public void createDrinksMenu()
     {
-        clearMenu();
+        //Inventory is opened and the menu is preset to clear.
         openInventory();
-        inventoryText.text = "Bathroom";
+        clearMenu();
 
-        //set the rectangle transform to the correct size for the content
-        rectTransf.sizeDelta = new Vector2(rectTransf.sizeDelta.x, (toilet.Length / 2 + 2f) * 150);
+        //The text of the sub-category is displayed at the top of the menu.
+        mainMenuText.text = "Drinks";
 
-        for (int i = 0; i < toilet.Length; i++)
+        //Set the rectangle transform to fit a correct size for the required content to load.
+        rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x,
+            (drinks.Length / 2 + 2f) * 150);
+
+        //If statement for starters
+        for (int i = 0; i < drinks.Length; i++)
         {
-            //get the gameocomponents inside the icon
-            GameObject goI = Instantiate(iconImage, scrollView);
-            RectTransform rectT = goI.GetComponent<RectTransform>();
-            Image imgR = goI.GetComponent<Image>();
-            ItemThumbnail iconS = goI.GetComponent<ItemThumbnail>();
+            //Retrieve the game-components inside of the thumbnail image used, including:
+            //The actual gameobject thumbnail, the rect transform element, the image used and the script attached (ItemThumbnail.cs)
+            GameObject gameobjectThumbnail = Instantiate(thumbnailImage, menuScrollView);
 
-            //this is used to determine the position of the image for odds and pair values
+            RectTransform rectTransform = gameobjectThumbnail.GetComponent<RectTransform>();
+
+            Image imgThumbnail = gameobjectThumbnail.GetComponent<Image>();
+
+            ItemThumbnail thumbnailScript = gameobjectThumbnail.GetComponent<ItemThumbnail>();
+
+            //Sizing the thumbnail directly.
             int div = i / 2;
             int rest = i % 2;
 
-
+            //If its set to 0 (even)
             if (rest == 0)
             {
-                goI.transform.localPosition = new Vector3((1 - 0.5f) * rectT.sizeDelta.x, -(div + 1.1f) * rectT.sizeDelta.y, 0);
+                //Transform the thumbnail image as shown
+                gameobjectThumbnail.transform.localPosition = new Vector3((1 - 0.5f) * rectTransform.sizeDelta.x, -(div + 1.1f) * rectTransform.sizeDelta.y, 0);
             }
             else
             {
-                goI.transform.localPosition = new Vector3((2 - 0.5f) * rectT.sizeDelta.x, -(div + 1.1f) * rectT.sizeDelta.y, 0); ;
+                //Format the thumbnail image like this instead
+                gameobjectThumbnail.transform.localPosition = new Vector3((2 - 0.5f) * rectTransform.sizeDelta.x, -(div + 1.1f) * rectTransform.sizeDelta.y, 0); ;
             }
 
-            //set the sprite
-            imgR.sprite = toilet_icons[i];
+            //Finds the relevant thumbnail sprite element from the starters icon list.
+            imgThumbnail.sprite = drinks_icons[i];
 
-            //set the icon scripts
-            iconS.type = typeOfFurniture.toilet;
-            iconS.indx = i;
-
+            //Sets our thumbnail script for every icon used.
+            thumbnailScript.type = typeOfMenuItem.drinks;
+            thumbnailScript.indx = i;
         }
     }
 
-    //destroys the gameobjects in the scene inside the menu
+    public void createSidesMenu()
+    {
+        //Inventory is opened and the menu is preset to clear.
+        openInventory();
+        clearMenu();
+
+        //The text of the sub-category is displayed at the top of the menu.
+        mainMenuText.text = "Sides";
+
+        //Set the rectangle transform to fit a correct size for the required content to load.
+        rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x,
+            (sides.Length / 2 + 2f) * 150);
+
+        //If statement for starters
+        for (int i = 0; i < sides.Length; i++)
+        {
+            //Retrieve the game-components inside of the thumbnail image used, including:
+            //The actual gameobject thumbnail, the rect transform element, the image used and the script attached (ItemThumbnail.cs)
+            GameObject gameobjectThumbnail = Instantiate(thumbnailImage, menuScrollView);
+
+            RectTransform rectTransform = gameobjectThumbnail.GetComponent<RectTransform>();
+
+            Image imgThumbnail = gameobjectThumbnail.GetComponent<Image>();
+
+            ItemThumbnail thumbnailScript = gameobjectThumbnail.GetComponent<ItemThumbnail>();
+
+            //Sizing the thumbnail directly.
+            int div = i / 2;
+            int rest = i % 2;
+
+            //If its set to 0 (even)
+            if (rest == 0)
+            {
+                //Transform the thumbnail image as shown
+                gameobjectThumbnail.transform.localPosition = new Vector3((1 - 0.5f) * rectTransform.sizeDelta.x, -(div + 1.1f) * rectTransform.sizeDelta.y, 0);
+            }
+            else
+            {
+                //Format the thumbnail image like this instead
+                gameobjectThumbnail.transform.localPosition = new Vector3((2 - 0.5f) * rectTransform.sizeDelta.x, -(div + 1.1f) * rectTransform.sizeDelta.y, 0); ;
+            }
+
+            //Finds the relevant thumbnail sprite element from the starters icon list.
+            imgThumbnail.sprite = sides_icons[i];
+
+            //Sets our thumbnail script for every icon used.
+            thumbnailScript.type = typeOfMenuItem.sides;
+            thumbnailScript.indx = i;
+        }
+    }
+
+    //Causes the removal of gameobjects within the menu.
     public void clearMenu()
     {
-        //get all the gameobjects and destroy them
-        GameObject[] go = GameObject.FindGameObjectsWithTag("icon");
+        //Find all instances of gameobjects and remove them all.
+        GameObject[] destroy = GameObject.FindGameObjectsWithTag("icon");
 
-        for(int i=0;i<go.Length;i++)
+        //For loop to find all elements of the gameobject with tag "icon"
+        for (int i = 0; i < destroy.Length; i++)
         {
-            Destroy(go[i]);
+            //Destroy these game objects within all index locations of point i
+            Destroy(destroy[i]);
         }
     }
 
+    //Function to open the menu.
     public void openInventory()
     {
-        anim.SetBool("open", true);
-        
+        //Set the gameobject instantiated at the top of class (menuSettings) to active-true, causing the menu to open.
+        menuSettings.SetActive(true);
     }
+
+    //Function to close the menu, default set to this function to not get in the way of user screen.
     public void closeInventory()
     {
-        anim.SetBool("open", false);
+        //Set the gameobject instantiated at the top of class (menuSettings) to active-false, causing the menu to close.
+        menuSettings.SetActive(false);
     }
 
-
+    //Controls the menu object's movement.
     public void setMovement()
     {
-        if(selectedObject!=null)
+        //If the game object is selected and exists...(not null)
+        if (selectedMenuObject != null)
         {
-            //get the interaction script and set the movement
-            ItemInteraction objcIntS = selectedObject.GetComponent<ItemInteraction>();
+            //Get the item interaction script and set the movement of the given item.
+            ItemInteraction objcIntS = selectedMenuObject.GetComponent<ItemInteraction>();
             objcIntS.movType = movementType.movement;
         }
     }
 
+    //Controls the menu object's rotation.
     public void setRotation()
     {
-        if (selectedObject != null)
+        //If the game object is selected and exists...(not null)
+        if (selectedMenuObject != null)
         {
-            //get the interaction script and set the movement
-            ItemInteraction objcIntS = selectedObject.GetComponent<ItemInteraction>();
+            //Get the item interaction script and set the rotation of the given item.
+            ItemInteraction objcIntS = selectedMenuObject.GetComponent<ItemInteraction>();
             objcIntS.movType = movementType.rotation;
         }
     }
 
+    //Controls the menu object's scaling.
     public void setScale()
     {
-        if (selectedObject != null)
+        //If the game object is selected and exists...(not null)
+        if (selectedMenuObject != null)
         {
-            //get the interaction script and set the movement
-            ItemInteraction objcIntS = selectedObject.GetComponent<ItemInteraction>();
+            //Get the item interaction script and set the scaling of the item.
+            ItemInteraction objcIntS = selectedMenuObject.GetComponent<ItemInteraction>();
             objcIntS.movType = movementType.scale;
         }
     }
 
+    //Deletes the game object selected from the menu.
     public void delete()
     {
-        if (selectedObject != null)
+        //If the game object is selected and exists...(not null)s
+        if (selectedMenuObject != null)
         {
-            //get the interaction script and set the movement
-            Destroy(selectedObject);
+            //Destroy the selected game object.
+            Destroy(selectedMenuObject);
         }
     }
 
