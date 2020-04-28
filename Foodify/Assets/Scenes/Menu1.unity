@@ -311,7 +311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73222e62a3dd2e84a861d662be42ea14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FirstPersonCamera: {fileID: 322926343}
+  ARCamera: {fileID: 322926343}
   DetectedPlanePrefab: {fileID: 1654175882956584, guid: 6a35c744e5010405c847fad90282d2be,
     type: 3}
   PrefabPlane: {fileID: 69701402046940936, guid: 6b32ad8e62aa61542978864f17711fd9,
@@ -659,13 +659,18 @@ PrefabInstance:
     - target: {fileID: 3887643595750826882, guid: dbf4953445cf77046b51776ceb48155b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: closeInventory
+      value: closeMenu
       objectReference: {fileID: 0}
     - target: {fileID: 3887643595750826882, guid: dbf4953445cf77046b51776ceb48155b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1246127078}
+    - target: {fileID: 2357326504673465395, guid: dbf4953445cf77046b51776ceb48155b,
+        type: 3}
+      propertyPath: mains.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2357326504673465395, guid: dbf4953445cf77046b51776ceb48155b,
         type: 3}
       propertyPath: menuScrollView
@@ -681,6 +686,22 @@ PrefabInstance:
       propertyPath: m_Avatar
       value: 
       objectReference: {fileID: 746336931}
+    - target: {fileID: 343383912, guid: dbf4953445cf77046b51776ceb48155b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: setItemRotation
+      objectReference: {fileID: 0}
+    - target: {fileID: 1096984247, guid: dbf4953445cf77046b51776ceb48155b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: setItemScale
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755425888, guid: dbf4953445cf77046b51776ceb48155b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: deleteMenuItem
+      objectReference: {fileID: 0}
+    - target: {fileID: 2041894440, guid: dbf4953445cf77046b51776ceb48155b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: setItemMovement
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dbf4953445cf77046b51776ceb48155b, type: 3}
 --- !u!224 &843908752 stripped
@@ -834,7 +855,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 38.395, y: 18.323, z: 34.901}
 --- !u!1001 &1394164186
 PrefabInstance:
@@ -924,49 +945,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1567547498
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1567547499}
-  - component: {fileID: 1567547500}
-  m_Layer: 0
-  m_Name: Follower
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1567547499
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1567547498}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1567547500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1567547498}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e196093f763393f42ac483417f4f5367, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &1987124070 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2357326503283847068, guid: dbf4953445cf77046b51776ceb48155b,

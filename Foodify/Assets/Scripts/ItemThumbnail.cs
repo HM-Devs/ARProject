@@ -1,59 +1,67 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-
+//Setting up the type of menu sub category users can choose from.
+//Similar to how item interaction functions
 public enum typeOfMenuItem
 {
     starters,mains,desserts,drinks,sides
 }
 
+//ItemThumbnail class which handles the thumbnail image of every item.
 public class ItemThumbnail : MonoBehaviour
 {
-    public MainMenu inv;
+    //Variable setup for item index, item type
+    public MainMenu menuS;
     public typeOfMenuItem type;
-    public int indx = 0;
-    // Start is called before the first frame update
+    public int index = 0;
+
+    //Start method is called before the first frame updates.
     void Start()
     {
-        inv = GameObject.FindGameObjectWithTag("inventory").GetComponent<MainMenu>();
+        //Our main menu is set to find gameobjects with the tag 'inventory' to begin with.
+        menuS = GameObject.FindGameObjectWithTag("inventory").GetComponent<MainMenu>();
     }
 
-    // Update is called once per frame
-    void Update()
+    //call to the menu to set the gameobject
+    public void selectItemFromMenu()
     {
-        
-    }
-
-    //call to the inventory to set the gameobject
-    public void selectGameObject_fromInventory()
-    {
+        //Checks if item menu type is of starters.
         if(type==typeOfMenuItem.starters)
         {
-            inv.selectedMenuItem = typeOfMenuItem.starters;
+            //Sets the selected item from subcategories.
+            menuS.selectedMenuItem = typeOfMenuItem.starters;
             
         }
+        //Checks if item menu type is of mains.
         else if (type == typeOfMenuItem.mains)
         {
-            inv.selectedMenuItem = typeOfMenuItem.mains;
+            //Sets the selected item from subcategories.
+            menuS.selectedMenuItem = typeOfMenuItem.mains;
             
         }
+        //Checks if item menu type is of desserts.
         else if (type == typeOfMenuItem.desserts)
         {
-            inv.selectedMenuItem = typeOfMenuItem.desserts;
+            //Sets the selected item from subcategories.
+            menuS.selectedMenuItem = typeOfMenuItem.desserts;
 
         }
+        //Checks if item menu type is of drinks.
         else if (type == typeOfMenuItem.drinks)
         {
-            inv.selectedMenuItem = typeOfMenuItem.drinks;
+            //Sets the selected item from subcategories.
+            menuS.selectedMenuItem = typeOfMenuItem.drinks;
 
         }
+        //Checks if item menu type is of sides.
         else if (type == typeOfMenuItem.sides)
         {
-            inv.selectedMenuItem = typeOfMenuItem.sides;
+            //Sets the selected item from subcategories.
+            menuS.selectedMenuItem = typeOfMenuItem.sides;
 
         }
-        inv.selectedItemIndex = indx;
+        //the selected index location from the main menu becomes the new index.
+        menuS.selectedItemIndex = index;
     }
 
 }

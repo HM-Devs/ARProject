@@ -1,156 +1,110 @@
-﻿
-//namespace
+﻿//Using the default HelloAR example from the ARCore package installed locally onto the project.
 namespace GoogleARCore.Examples.HelloAR
 {
-    using System.Collections.Generic;
     using GoogleARCore;
-    using GoogleARCore.Examples.Common;
     using UnityEngine;
     using UnityEngine.EventSystems;
 
+    //Setting up the touch input propagation for Instant Preview within UNITY.
 #if UNITY_EDITOR
-    // Set up touch input propagation while using Instant Preview in the editor.
+    //ARCore feature.
     using Input = InstantPreviewInput;
 #endif
 
-   
-    /// Controls the HelloAR example.
-    
+    //Handles the HelloAR example.
     public class ARRendering : MonoBehaviour
     {
-       
-        //prevent doubles
-        bool spawn = false;
+        //Stops doubles from spawning in.
+        bool spawns = false;
 
+        //Controls the AR camera used to render the camera image (such as the AR background).
+        public Camera ARCamera;
 
-        /// The first-person camera being used to render the passthrough camera image (i.e. AR
-        /// background).
-
-        public Camera FirstPersonCamera;
-
-       
-        /// A prefab for tracking and visualizing detected planes.
-        
+        //Creation of a prefab variable to when a raycast from the user touch hits a detected plane (vertical).
         public GameObject DetectedPlanePrefab;
 
-       
-        /// A model to place when a raycast from a user touch hits a plane.
-        
+        //Prefab to place when a raycast from a users touch input hits a plane.
         public GameObject PrefabPlane;
 
-       
-        /// The rotation in degrees need to apply to model when the Andy model is placed.
-        
+        //Rotation in degrees needed to apply to a model when placed.
         private const float k_ModelRotation = 180.0f;
 
-       
-        /// True if the app is in the process of quitting due to an ARCore connection error,
-        /// otherwise false.
-        
+        //Returns true if the app is in the process of quitting due to an ARCore connection error, else return false.
         private bool m_IsQuitting = false;
 
+        //Touch input setup.
         Touch touch;
 
-        /// The Unity Update() method.
 
-        private void Start()
+        public void Awake()
         {
-           
+            //Enables ARCore to target 60gps camera capture frame rate on any supported device.
+            Application.targetFrameRate = 60;
         }
 
-
+        //Update method.
         public void Update()
         {
             _UpdateApplicationLifecycle();
-                       
 
-
-            // If the player has not touched the screen, we are done with this update.
-            if (Input.touchCount < 1 || (touch = Input.GetTouch(0)).phase != TouchPhase.Began || spawn==true)
+            //If the player has not touched the screen, we are done with this update.
+            if (Input.touchCount < 1 || (touch = Input.GetTouch(0)).phase != TouchPhase.Began || spawns == true)
             {
                 return;
             }
-            // in the case that the player drags on screen, create a paperball
+            //In the case that the player drags on screen, creates a paperball.
 
-
-           
-
-
-            // Should not handle input if the player is pointing on UI.
+            //Should not handle inputs if the player is not pointing on the UI on-screen.
             if (EventSystem.current.IsPointerOverGameObject(touch.fingerId))
             {
+                //Returns nothing.
                 return;
             }
 
-            // Raycast against the location the player touched to search for planes.
+            //Raycast set against the location of the player touched to search for planes.
             TrackableHit hit;
             TrackableHitFlags raycastFilter = TrackableHitFlags.PlaneWithinPolygon |
                 TrackableHitFlags.FeaturePointWithSurfaceNormal;
 
             if (Frame.Raycast(touch.position.x, touch.position.y, raycastFilter, out hit))
             {
-                // Use hit pose and camera pose to check if hittest is from the
-                // back of the plane, if it is, no need to create the anchor.
+                //Uses hit pose and camera pose to check if hittest is from the back of the plane, if so, no need to create the anchor.
                 if ((hit.Trackable is DetectedPlane) &&
-                    Vector3.Dot(FirstPersonCamera.transform.position - hit.Pose.position,
+                    Vector3.Dot(ARCamera.transform.position - hit.Pose.position,
                         hit.Pose.rotation * Vector3.up) < 0)
                 {
                     Debug.Log("Hit at back of the current DetectedPlane");
                 }
                 else
                 {
-                    // Choose the Andy model for the Trackable that got hit.
-                    /* GameObject prefab;
-                     if (hit.Trackable is FeaturePoint)
-                     {
-                         prefab = PrefabMarker;
-                     }
-                     else
-                     {
-                         prefab = PrefabMarker;
-                     }*/
-
-                     // Create an anchor to allow ARCore to track the hitpoint as understanding of
-                        // the physical world evolves.
-
                     var anchor = hit.Trackable.CreateAnchor(hit.Pose);
 
-
-                    /////////////////////////////////
-                    // GROUND
-                    ///////////////////////////////////
-                    //isntantiate GROUND in order to insert the other objects in the scene
-
+                    //Instantiate the ground in order to insert other objects within our scene.
                     Instantiate(PrefabPlane, hit.Pose.position, hit.Pose.rotation);
-
-                    spawn = true;
-                 
-
+                    //Allow spawning in.
+                    spawns = true;
                 }
             }
         }
-
-
+        //Fixed update method, if the spawns are true, change it to false to remove doubles.
         private void FixedUpdate()
         {
-            if(spawn==true)
+            if (spawns == true)
             {
-                spawn = false;
+                spawns = false;
             }
         }
 
-
-        /// Check and update the application lifecycle.
-
+        //Checking and updating an application's lifecycle.
         private void _UpdateApplicationLifecycle()
         {
-            // Exit the app when the 'back' button is pressed.
+            // Exit the app when the back button is pressed (for desktop testing only).
             if (Input.GetKey(KeyCode.Escape))
             {
                 Application.Quit();
             }
 
-            // Only allow the screen to sleep when not tracking.
+            //Only allows screen to sleep when the device is not tracking.
             if (Session.Status != SessionStatus.Tracking)
             {
                 const int lostTrackingSleepTimeout = 15;
@@ -166,34 +120,35 @@ namespace GoogleARCore.Examples.HelloAR
                 return;
             }
 
-            // Quit if ARCore was unable to connect and give Unity some time for the toast to
-            // appear.
+            //Quits if ARCore is unable to connect and give Unity time for the toast message to appear.
             if (Session.Status == SessionStatus.ErrorPermissionNotGranted)
             {
-                _ShowAndroidToastMessage("Camera permission is needed to run this application.");
+                //Pop-Up error message.
+                _ShowAndroidToastMessage("Camera permission is required to run the application. Try again.");
                 m_IsQuitting = true;
+
+                //Quits app.
                 Invoke("_DoQuit", 0.5f);
             }
+            //If the status is an error in connection.
             else if (Session.Status.IsError())
             {
                 _ShowAndroidToastMessage(
-                    "ARCore encountered a problem connecting.  Please start the app again.");
+                    "ARCore encountered a problem connecting. Try connecting again");
                 m_IsQuitting = true;
+
+                //Quits app.
                 Invoke("_DoQuit", 0.5f);
             }
         }
 
-       
-        /// Actually quit the application.
-        
+        //Quit the application.
         private void _DoQuit()
         {
             Application.Quit();
         }
 
-       
-        /// Show an Android toast message.
-        
+        //Below is default toast messages that come with the HelloAR example.
         /// <param name="message">Message string to show in the toast.</param>
         private void _ShowAndroidToastMessage(string message)
         {

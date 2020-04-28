@@ -627,6 +627,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2357326504673465395, guid: dbf4953445cf77046b51776ceb48155b,
         type: 3}
+      propertyPath: mains.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2357326504673465395, guid: dbf4953445cf77046b51776ceb48155b,
+        type: 3}
       propertyPath: chair_tables.Array.data[9]
       value: 
       objectReference: {fileID: 100004, guid: 6aefd9b8d8cb28f4f87b54d78bf0fca3, type: 3}
@@ -636,10 +641,26 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 2a04888ba2fa0a441a84c5a1c4159386,
         type: 3}
+    - target: {fileID: 2357326504673465395, guid: dbf4953445cf77046b51776ceb48155b,
+        type: 3}
+      propertyPath: starters.Array.data[0]
+      value: 
+      objectReference: {fileID: 1000013122234568, guid: 87a32384fe2633648996ab825d5f4b5b,
+        type: 3}
     - target: {fileID: 2357326503579170300, guid: dbf4953445cf77046b51776ceb48155b,
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2357326503714576784, guid: dbf4953445cf77046b51776ceb48155b,
+        type: 3}
+      propertyPath: m_Text
+      value: Items
+      objectReference: {fileID: 0}
+    - target: {fileID: 2357326505136644178, guid: dbf4953445cf77046b51776ceb48155b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dbf4953445cf77046b51776ceb48155b, type: 3}

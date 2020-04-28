@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 
@@ -18,6 +16,7 @@ public class MainMenu : MonoBehaviour
     public int selectedItemIndex;
 
     //Gameobject creation for each sub-menu category. 
+    //This is for clarity, will display in the prefab "MainMenuInteractions"
     [Header("Main Menu Categories ")]
 
     public GameObject[] starters;
@@ -26,8 +25,8 @@ public class MainMenu : MonoBehaviour
     public GameObject[] drinks;
     public GameObject[] sides;
 
-
     //Thumbnail sprites attached to each menu sub-category - used to show users images of the item they're about to order.
+    //This is for clarity, will display in the prefab "MainMenuInteractions"
     [Header("Menu Category Thumbnails ")]
 
     public Sprite[] starters_icons;
@@ -35,7 +34,6 @@ public class MainMenu : MonoBehaviour
     public Sprite[] desserts_icons;
     public Sprite[] drinks_icons;
     public Sprite[] sides_icons;
-
 
     //Other UI settings setup here which are configured within the MainMenuInteractions gameobject.
     [Header("Menu UI Settings")]
@@ -61,6 +59,9 @@ public class MainMenu : MonoBehaviour
     //Start method, happens as soon as the app loads.
     void Start()
     {
+        //Set the screen rotation to landscape left only
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
+
         //We create our rect transform for our menu.
         rectTransform = menuScrollView.GetComponent<RectTransform>();
 
@@ -129,7 +130,7 @@ public class MainMenu : MonoBehaviour
                         //Otherwise we set the movement type to none and set the game object to null since none of the
                         //Pre-conditions in our initial if-statement have been made.
                         ItemInteraction objcIntS = selectedMenuObject.GetComponent<ItemInteraction>();
-                        objcIntS.movType = movementType.none;
+                        objcIntS.movementSetting = itemMovementType.none;
 
                         //Object selected is now null.
                         selectedMenuObject = null;
@@ -151,8 +152,8 @@ public class MainMenu : MonoBehaviour
     public void createStartersMenu()
     {
         //Inventory is opened and the menu is preset to clear.
-        openInventory();
-        clearMenu();
+        openMenu();
+        clearItemMenu();
 
         //The text of the sub-category is displayed at the top of the menu.
         mainMenuText.text = "Starters";
@@ -195,22 +196,20 @@ public class MainMenu : MonoBehaviour
 
             //Sets our thumbnail script for every icon used.
             thumbnailScript.type = typeOfMenuItem.starters;
-            thumbnailScript.indx = i;
-
-
+            thumbnailScript.index = i;
         }
     }
     //it is called when pressing the chair/tables button
     public void createMainsMenu()
     {
         //Inventory is opened and the menu is preset to clear.
-        openInventory();
-        clearMenu();
+        openMenu();
+        clearItemMenu();
 
         //The text of the sub-category is displayed at the top of the menu.
         mainMenuText.text = "Mains";
 
-        //Set the rectangle transform to fit a correct size for the required content to load.
+        //Set the rect transform to fit a correct size for the required content to load.
         rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x,
             (mains.Length / 2 + 2f) * 150);
 
@@ -248,17 +247,15 @@ public class MainMenu : MonoBehaviour
 
             //Sets our thumbnail script for every icon used.
             thumbnailScript.type = typeOfMenuItem.mains;
-            thumbnailScript.indx = i;
-
-
+            thumbnailScript.index = i;
         }
     }
     //it is called when pressing the self button
     public void createDessertsMenu()
     {
         //Inventory is opened and the menu is preset to clear.
-        openInventory();
-        clearMenu();
+        openMenu();
+        clearItemMenu();
 
         //The text of the sub-category is displayed at the top of the menu.
         mainMenuText.text = "Desserts";
@@ -301,16 +298,15 @@ public class MainMenu : MonoBehaviour
 
             //Sets our thumbnail script for every icon used.
             thumbnailScript.type = typeOfMenuItem.desserts;
-            thumbnailScript.indx = i;
-
-
+            thumbnailScript.index = i;
         }
     }
+
     public void createDrinksMenu()
     {
         //Inventory is opened and the menu is preset to clear.
-        openInventory();
-        clearMenu();
+        openMenu();
+        clearItemMenu();
 
         //The text of the sub-category is displayed at the top of the menu.
         mainMenuText.text = "Drinks";
@@ -353,15 +349,15 @@ public class MainMenu : MonoBehaviour
 
             //Sets our thumbnail script for every icon used.
             thumbnailScript.type = typeOfMenuItem.drinks;
-            thumbnailScript.indx = i;
+            thumbnailScript.index = i;
         }
     }
 
     public void createSidesMenu()
     {
         //Inventory is opened and the menu is preset to clear.
-        openInventory();
-        clearMenu();
+        openMenu();
+        clearItemMenu();
 
         //The text of the sub-category is displayed at the top of the menu.
         mainMenuText.text = "Sides";
@@ -404,12 +400,12 @@ public class MainMenu : MonoBehaviour
 
             //Sets our thumbnail script for every icon used.
             thumbnailScript.type = typeOfMenuItem.sides;
-            thumbnailScript.indx = i;
+            thumbnailScript.index = i;
         }
     }
 
     //Causes the removal of gameobjects within the menu.
-    public void clearMenu()
+    public void clearItemMenu()
     {
         //Find all instances of gameobjects and remove them all.
         GameObject[] destroy = GameObject.FindGameObjectsWithTag("icon");
@@ -423,59 +419,59 @@ public class MainMenu : MonoBehaviour
     }
 
     //Function to open the menu.
-    public void openInventory()
+    public void openMenu()
     {
         //Set the gameobject instantiated at the top of class (menuSettings) to active-true, causing the menu to open.
         menuSettings.SetActive(true);
     }
 
     //Function to close the menu, default set to this function to not get in the way of user screen.
-    public void closeInventory()
+    public void closeMenu()
     {
         //Set the gameobject instantiated at the top of class (menuSettings) to active-false, causing the menu to close.
         menuSettings.SetActive(false);
     }
 
     //Controls the menu object's movement.
-    public void setMovement()
+    public void setItemMovement()
     {
         //If the game object is selected and exists...(not null)
         if (selectedMenuObject != null)
         {
             //Get the item interaction script and set the movement of the given item.
             ItemInteraction objcIntS = selectedMenuObject.GetComponent<ItemInteraction>();
-            objcIntS.movType = movementType.movement;
+            objcIntS.movementSetting = itemMovementType.movement;
         }
     }
 
     //Controls the menu object's rotation.
-    public void setRotation()
+    public void setItemRotation()
     {
         //If the game object is selected and exists...(not null)
         if (selectedMenuObject != null)
         {
             //Get the item interaction script and set the rotation of the given item.
             ItemInteraction objcIntS = selectedMenuObject.GetComponent<ItemInteraction>();
-            objcIntS.movType = movementType.rotation;
+            objcIntS.movementSetting = itemMovementType.rotation;
         }
     }
 
     //Controls the menu object's scaling.
-    public void setScale()
+    public void setItemScale()
     {
         //If the game object is selected and exists...(not null)
         if (selectedMenuObject != null)
         {
             //Get the item interaction script and set the scaling of the item.
             ItemInteraction objcIntS = selectedMenuObject.GetComponent<ItemInteraction>();
-            objcIntS.movType = movementType.scale;
+            objcIntS.movementSetting = itemMovementType.scale;
         }
     }
 
     //Deletes the game object selected from the menu.
-    public void delete()
+    public void deleteMenuItem()
     {
-        //If the game object is selected and exists...(not null)s
+        //If the game object is selected and exists...(not null)
         if (selectedMenuObject != null)
         {
             //Destroy the selected game object.

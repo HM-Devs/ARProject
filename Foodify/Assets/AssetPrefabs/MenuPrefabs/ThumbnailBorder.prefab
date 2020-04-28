@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2197966546284495677}
   - component: {fileID: 8397438222886114429}
   m_Layer: 5
-  m_Name: ButtonIcon
+  m_Name: ThumbnailBorder
   m_TagString: icon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -119,7 +119,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8397438222886114429}
-        m_MethodName: selectGameObject_fromInventory
+        m_MethodName: selectItemFromMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -143,9 +143,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbda36d4ce337db4382d843b9abef648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inv: {fileID: 0}
+  menuS: {fileID: 0}
   type: 0
-  indx: 0
+  index: 0
 --- !u!1 &6965636225448243833
 GameObject:
   m_ObjectHideFlags: 0
