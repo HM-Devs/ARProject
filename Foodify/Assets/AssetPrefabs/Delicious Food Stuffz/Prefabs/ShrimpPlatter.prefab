@@ -203,6 +203,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 400004}
+  - component: {fileID: 6234031488090380141}
   m_Layer: 0
   m_Name: ShrimpPlatter
   m_TagString: Untagged
@@ -228,6 +229,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6234031488090380141
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100004}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.50993884, y: 0.18009019, z: 1}
+  m_Center: {x: 0.0062827542, y: 0.04240918, z: 0}
 --- !u!1 &100006
 GameObject:
   m_ObjectHideFlags: 0

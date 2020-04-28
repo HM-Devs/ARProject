@@ -398,6 +398,7 @@ GameObject:
   m_Component:
   - component: {fileID: 400008}
   - component: {fileID: 3547415689587087781}
+  - component: {fileID: 5932091328577222639}
   m_Layer: 0
   m_Name: Cheeseburgers_Plated
   m_TagString: Untagged
@@ -436,3 +437,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.56966364, y: 0.27614498, z: 0.7123318}
   m_Center: {x: 0.0077949166, y: 0.055031776, z: 0.14383411}
+--- !u!65 &5932091328577222639
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100008}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

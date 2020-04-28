@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 400000}
+  - component: {fileID: 7516201425094809946}
   m_Layer: 0
   m_Name: WineGlass
   m_TagString: Untagged
@@ -31,6 +32,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7516201425094809946
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.25381637, y: 0.37971562, z: 1}
+  m_Center: {x: 0.016888767, y: 0.13818231, z: 0}
 --- !u!1 &100002
 GameObject:
   m_ObjectHideFlags: 0
