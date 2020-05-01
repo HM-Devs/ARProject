@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿//This script is used to instantiate and control the instantiation of item thumbnails.
+//This script was adapted from the following existing unity asset: https://assetstore.unity.com/packages/tools/gui/ar-gallery-inventory-room-153316 
+//This script was used to help understand the best way to implement item icon images to use within the created menu system and provided an understanding to
+//Concepts such as Script inheritance, using unity tags, index selection from an array. 
+
+using UnityEngine;
 
 //Setting up the type of menu sub category users can choose from.
 //Similar to how item interaction functions

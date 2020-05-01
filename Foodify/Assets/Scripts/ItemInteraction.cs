@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿//This script is used to control and configure movement with instantiated game objects.
+//This script was adapted from the following existing unity asset: https://assetstore.unity.com/packages/tools/gui/ar-gallery-inventory-room-153316 
+//This script was used to help understand the best way to implement item movement, in the form of scaling, rotation and general movement.
+
+using UnityEngine;
 
 //Movement types for the item
 public enum itemMovementType
@@ -83,22 +87,22 @@ public class ItemInteraction : MonoBehaviour
         } 
     }
 
-    //Move function for the attached button.
-    public void menuItemMove(Vector3 pos)
+    //Move method for the attached button.
+    public void menuItemMove(Vector3 position)
     {
-        transform.position = pos;
+        transform.position = position;
     }
     
-    //Rotate function for the attached button.
-    public void menuItemRotate(Vector3 dir)
+    //Rotate method for the attached button.
+    public void menuItemRotate(Vector3 direction)
     {
-        transform.right = dir;
+        transform.right = direction;
         transform.rotation*= Quaternion.Euler(-90, 0, 0); ;
     }
 
     //Scale button for the attached button.
-    public void menuItemScale(float mult)
+    public void menuItemScale(float mscale)
     {
-        transform.localScale = mult*new Vector3(1,1,1);
+        transform.localScale = mscale*new Vector3(1,1,1);
     }
 }

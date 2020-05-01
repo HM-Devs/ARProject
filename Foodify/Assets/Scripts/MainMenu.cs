@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿//This script is used to instantiate and control all features within the main menu itself, including:
+//Item spawning,  plane detection, icon creation, creation of menus by type, opening and closing menus, rotate, scaling, deleting items. 
+//This script was adapted from the following existing unity asset: https://assetstore.unity.com/packages/tools/gui/ar-gallery-inventory-room-153316 
+//This script was used to help understand the best way to configure multiple item spawning, by considering array indexes and the raycast system.
+//This script was adapted by implementing new open and close menu functions. 
+//Screen orientation functions were also adapted for pre-set mobile device orientation and changes were made to variables and values within the script.
+
+using UnityEngine;
 using UnityEngine.UI;
-
-
-//Note:Everything set up here is essentially controlled within the MainMenuInteractions gameobject
-// in the MenuPrefab folder.
 
 //Creation of the MainMenu class.
 public class MainMenu : MonoBehaviour
@@ -59,7 +62,7 @@ public class MainMenu : MonoBehaviour
     //Start method, happens as soon as the app loads.
     void Start()
     {
-        //Set the screen rotation to landscape left only
+        //Set the screen rotation to landscape left only during AR scene. 
         Screen.orientation = ScreenOrientation.LandscapeLeft;
 
         //We create our rect transform for our menu.
@@ -116,14 +119,14 @@ public class MainMenu : MonoBehaviour
                     if (selectedMenuObject == null)
                     {
                         //We instantiate the gameobject item.
-                        GameObject go = Instantiate(menuObject, hits.point, Quaternion.Euler(-90, 0, 0));
+                        GameObject spawn = Instantiate(menuObject, hits.point, Quaternion.Euler( 0, 0, 0));
 
-                        //We also set the scale.
-                        go.transform.localScale = go.transform.localScale * 0.8f;
+                        //We also set the scale of the transform.
+                       spawn.transform.localScale =spawn.transform.localScale * 0.8f;
 
                         //And get and set components.
-                        go.AddComponent<ItemInteraction>();
-                        go.tag = "object";
+                       spawn.AddComponent<ItemInteraction>();
+                        spawn.tag = "object";
                     }
                     else
                     {

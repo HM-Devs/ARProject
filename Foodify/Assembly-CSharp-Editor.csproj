@@ -89,7 +89,6 @@
     <Compile Include="Assets\GoogleARCore\SDK\Scripts\Editor\LogRequestUtils.cs" />
     <Compile Include="Assets\GoogleARCore\SDK\Scripts\Editor\PreprocessBuildBase.cs" />
     <Compile Include="Assets\GoogleARCore\SDK\Scripts\Editor\RequiredOptionalPreprocessBuild.cs" />
-    <Compile Include="Assets\ScriptCalculator\Editor\ScriptCalculator.cs" />
     <None Include="Assets\GoogleARCore\Editor\ARCoreiOSDependencies.template" />
     <None Include="Assets\PlayServicesResolver\Editor\play-services-resolver_v1.2.122.0.txt" />
     <Reference Include="Unity.TextMeshPro.Editor">

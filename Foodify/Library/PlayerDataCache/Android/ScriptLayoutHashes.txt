@@ -1,10 +1,19 @@
 Android
 PlayerPath?
-C:/Users/Gamer/Desktop/ARProject/Foodify/1.apk
+C:/Users/Gamer/Desktop/ARProject/Foodify/Foodify.apk
 SceneListBegin?
 Assets/Scenes/HomeScene.unity
-Assets/Scenes/Menu1.unity
-Assets/Scenes/Menu2.unity
+Assets/Scenes/Menus/Menu1.unity
+Assets/Scenes/Menus/Menu2.unity
+Assets/Scenes/Menus/Menu3.unity
+Assets/Scenes/Menus/Menu4.unity
+Assets/Scenes/Menus/Menu5.unity
+Assets/Scenes/Menus/Menu6.unity
+Assets/Scenes/Menus/Menu7.unity
+Assets/Scenes/Menus/Menu8.unity
+Assets/Scenes/Menus/Menu9.unity
+Assets/Scenes/Menus/Menu10.unity
+Assets/Scenes/Menus/Menu11.unity
 SceneListEnd?
 984dcc0ba3707b7691fbdca8ff508d28 Unity.TextMeshPro.dll:TMPro.TMP_SelectionCaret
 01aa15e337e3a9c62f15153dfac6d589 Unity.TextMeshPro.dll:TMPro.TMP_Dropdown

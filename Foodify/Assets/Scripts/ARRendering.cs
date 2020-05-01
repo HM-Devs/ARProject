@@ -1,4 +1,10 @@
-﻿//Using the default HelloAR example from the ARCore package installed locally onto the project.
+﻿//This script was directly used from the 'HelloAR' example from the 'ARCore' SDK.
+//The full script can be found in the project directory under 'GoogleARCore/Examples/HelloAR/Scripts/"
+//Alternatively, the script can be found here: https://developers.google.com/ar/develop/unity/tutorials/hello-ar-sample
+//Whilst the majority of this script remains the same, some functionality has been removed, such as spawning in items.
+//This is because this functionality instead occurs in the main menu script.
+
+//Using the default HelloAR example from the ARCore package installed locally onto the project.
 namespace GoogleARCore.Examples.HelloAR
 {
     using GoogleARCore;
